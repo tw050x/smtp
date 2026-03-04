@@ -1,0 +1,14 @@
+{
+  "author": "tw050x (Richard Kielty)",
+  "description": "The database project for smtp-database, primarily used for local development",
+  "dependencies": {
+    "mongodb": "workspace:*"
+  },
+  "installConfig": {
+    "hoistingLimits": "workspaces"
+  },
+  "license": "UNLICENSED",
+  "name": "smtp-database",
+  "private": true,
+  "version": "0.1.0"
+}

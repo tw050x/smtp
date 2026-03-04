@@ -1,0 +1,162 @@
+div(
+  id=`${connectionsTableId}`
+  hx-get=`/admin/connections?pi=${pagination.pageIndex}&ps=${pagination.pageSize}&df=${searchFilters.dateFrom || ''}&dt=${searchFilters.dateTo || ''}`
+  hx-trigger=`load delay:${onLoadDelayInSeconds}s`
+  hx-swap="outerHTML"
+)
+  div(class="flex flex-row justify-end pb-2")
+    div(class="text-sm text-gray-600") Page #{pagination.pageIndex + 1} of #{pagination.totalPageCount}
+  div(class="flex flex-row justify-between pb-2")
+    div(class="flex flex-row")
+      div(class="inline-flex rounded-md shadow-sm")
+        form(method="GET" hx-get="/admin/connections" hx-target=`#${connectionsTableId}` hx-push-url="true" hx-swap="outerHTML")
+          input(type="hidden" name="pi" value="0")
+          input(type="hidden" name="ps" value=(pagination.pageSize))
+          if searchFilters && searchFilters.dateFrom
+            input(type="hidden" name="df" value=(searchFilters.dateFrom))
+          if searchFilters && searchFilters.dateTo
+            input(type="hidden" name="dt" value=(searchFilters.dateTo))
+          button(
+            type="submit"
+            class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-1 px-2 rounded-l-md text-sm cursor-pointer disabled:cursor-not-allowed disabled:bg-gray-500"
+            disabled=(pagination.pageIndex <= 0)
+          ) First Page
+        form(method="GET" hx-get="/admin/connections" hx-target=`#${connectionsTableId}` hx-push-url="true" hx-swap="outerHTML")
+          input(type="hidden" name="pi" value=(pagination.pageIndex - 1))
+          input(type="hidden" name="ps" value=(pagination.pageSize))
+          if searchFilters && searchFilters.dateFrom
+            input(type="hidden" name="df" value=(searchFilters.dateFrom))
+          if searchFilters && searchFilters.dateTo
+            input(type="hidden" name="dt" value=(searchFilters.dateTo))
+          button(
+            type="submit"
+            class=`bg-blue-500 hover:bg-blue-700 text-white font-bold py-1 px-2 rounded-r-md text-sm cursor-pointer disabled:cursor-not-allowed disabled:bg-gray-500 border-l ${pagination.pageIndex <= 0 ? 'border-gray-400' : 'border-blue-600'}`
+            disabled=(pagination.pageIndex <= 0)
+          ) Previous Page
+    div(class="flex flex-row")
+      div(class="inline-flex rounded-md shadow-sm")
+        form(method="GET" hx-get="/admin/connections" hx-target=`#${connectionsTableId}` hx-push-url="true" hx-swap="outerHTML")
+          input(type="hidden" name="pi" value=(pagination.pageIndex + 1))
+          input(type="hidden" name="ps" value=(pagination.pageSize))
+          if searchFilters && searchFilters.dateFrom
+            input(type="hidden" name="df" value=(searchFilters.dateFrom))
+          if searchFilters && searchFilters.dateTo
+            input(type="hidden" name="dt" value=(searchFilters.dateTo))
+          button(
+            type="submit"
+            class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-1 px-2 rounded-l-md text-sm cursor-pointer disabled:cursor-not-allowed disabled:bg-gray-500"
+            disabled=(pagination.pageIndex >= (pagination.totalPageCount - 1))
+          ) Next Page
+        form(method="GET" hx-get="/admin/connections" hx-target=`#${connectionsTableId}` hx-push-url="true" hx-swap="outerHTML")
+          input(type="hidden" name="pi" value=(pagination.totalPageCount - 1))
+          input(type="hidden" name="ps" value=(pagination.pageSize))
+          if searchFilters && searchFilters.dateFrom
+            input(type="hidden" name="df" value=(searchFilters.dateFrom))
+          if searchFilters && searchFilters.dateTo
+            input(type="hidden" name="dt" value=(searchFilters.dateTo))
+          button(
+            type="submit"
+            class=`bg-blue-500 hover:bg-blue-700 text-white font-bold py-1 px-2 rounded-r-md text-sm cursor-pointer disabled:cursor-not-allowed disabled:bg-gray-500 border-l ${pagination.pageIndex >= (pagination.totalPageCount - 1) ? 'border-gray-400' : 'border-blue-600'}`
+            disabled=(pagination.pageIndex >= (pagination.totalPageCount - 1))
+          ) Last Page
+  div(class="flex flex-col flex-grow")
+    for connection in connections
+      a(href=`/admin/connections/${connection.uuid}`)
+        div(class=`flex flex-row border-2 border-gray-200 mb-2 p-4 cursor-pointer rounded-lg hover:shadow-md transition-shadow"` style=`opacity: ${connection.lastViewedAt === undefined ? '1' : '0.5'}`)
+          div(class="flex flex-col grow")
+            div(class="text-sm font-bold") UUID
+            div(class="text-sm") #{connection.uuid}
+          div(class="flex flex-col pl-8 text-right")
+            div(class="text-sm font-bold") Lines
+            div(class="text-sm") #{connection.linesCount}
+          div(class="flex flex-col pl-8 text-right")
+            div(class="text-sm font-bold") Received
+            div(class="text-sm") #{connection.received}
+  div(class="flex flex-row justify-between")
+    div(class="flex flex-row")
+      div(class="inline-flex rounded-md shadow-sm")
+        form(method="GET" hx-get="/admin/connections" hx-target=`#${connectionsTableId}` hx-push-url="true" hx-swap="outerHTML")
+          input(type="hidden" name="pi" value="0")
+          input(type="hidden" name="ps" value=(pagination.pageSize))
+          if searchFilters && searchFilters.dateFrom
+            input(type="hidden" name="df" value=(searchFilters.dateFrom))
+          if searchFilters && searchFilters.dateTo
+            input(type="hidden" name="dt" value=(searchFilters.dateTo))
+          button(
+            type="submit"
+            class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-1 px-2 rounded-l-md text-sm disabled:cursor-not-allowed disabled:bg-gray-500"
+            disabled=(pagination.pageIndex <= 0)
+          ) First Page
+        form(method="GET" hx-get="/admin/connections" hx-target=`#${connectionsTableId}` hx-push-url="true" hx-swap="outerHTML")
+          input(type="hidden" name="pi" value=(pagination.pageIndex - 1))
+          input(type="hidden" name="ps" value=(pagination.pageSize))
+          if searchFilters && searchFilters.dateFrom
+            input(type="hidden" name="df" value=(searchFilters.dateFrom))
+          if searchFilters && searchFilters.dateTo
+            input(type="hidden" name="dt" value=(searchFilters.dateTo))
+          button(
+            type="submit"
+            class=`bg-blue-500 hover:bg-blue-700 text-white font-bold py-1 px-2 rounded-r-md text-sm cursor-pointer disabled:cursor-not-allowed disabled:bg-gray-500 border-l ${pagination.pageIndex <= 0 ? 'border-gray-400' : 'border-blue-600'}`
+            disabled=(pagination.pageIndex <= 0)
+          ) Previous Page
+    div(class="flex flex-row")
+      div(class="inline-flex rounded-md shadow-sm")
+        form(method="GET" hx-get="/admin/connections" hx-target=`#${connectionsTableId}` hx-push-url="true" hx-swap="outerHTML")
+          input(type="hidden" name="pi" value=(pagination.pageIndex + 1))
+          input(type="hidden" name="ps" value=(pagination.pageSize))
+          if searchFilters && searchFilters.dateFrom
+            input(type="hidden" name="df" value=(searchFilters.dateFrom))
+          if searchFilters && searchFilters.dateTo
+            input(type="hidden" name="dt" value=(searchFilters.dateTo))
+          button(
+            type="submit"
+            class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-1 px-2 rounded-l-md text-sm cursor-pointer disabled:cursor-not-allowed disabled:bg-gray-500"
+            disabled=(pagination.pageIndex >= (pagination.totalPageCount - 1))
+          ) Next Page
+        form(method="GET" hx-get="/admin/connections" hx-target=`#${connectionsTableId}` hx-push-url="true" hx-swap="outerHTML")
+          input(type="hidden" name="pi" value=(pagination.totalPageCount - 1))
+          input(type="hidden" name="ps" value=(pagination.pageSize))
+          if searchFilters && searchFilters.dateFrom
+            input(type="hidden" name="df" value=(searchFilters.dateFrom))
+          if searchFilters && searchFilters.dateTo
+            input(type="hidden" name="dt" value=(searchFilters.dateTo))
+          button(
+            type="submit"
+            class=`bg-blue-500 hover:bg-blue-700 text-white font-bold py-1 px-2 rounded-r-md text-sm cursor-pointer disabled:cursor-not-allowed disabled:bg-gray-500 border-l ${pagination.pageIndex >= (pagination.totalPageCount - 1) ? 'border-gray-400' : 'border-blue-600'}`
+            disabled=(pagination.pageIndex >= (pagination.totalPageCount - 1))
+          ) Last Page
+
+  div(class="circular-loader-container")
+    svg(viewBox="0 0 36 36")
+      circle(cx="18" cy="18" r="16")
+
+  style.
+    @keyframes circular-loader {
+      0% {
+        stroke-dasharray: 0, 100;
+      }
+      100% {
+        stroke-dasharray: 100, 0;
+      }
+    }
+
+    .circular-loader-container {
+      width: 10px;
+      height: 10px;
+      display: inline-block;
+      position: absolute;
+      top: 10px;
+      right: 10px;
+    }
+
+    .circular-loader-container svg {
+      transform: rotate(-90deg);
+    }
+
+    .circular-loader-container circle {
+      fill: none;
+      stroke: #9ca3af;
+      stroke-width: 8;
+      stroke-dasharray: 0, 100;
+      animation: circular-loader #{onLoadDelayInSeconds}s linear infinite;
+    }

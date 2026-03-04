@@ -1,0 +1,85 @@
+{
+  "tasks": [
+    {
+      "label": "tsc: watch admin",
+      "type": "shell",
+      "command": "node_modules/.bin/tsc",
+      "args": ["--watch", "--preserveWatchOutput", "--project", "service/smtp-admin"],
+      "group": "build",
+      "problemMatcher": ["$tsc-watch"],
+      "isBackground": true,
+      "presentation": {
+        "reveal": "always",
+        "panel": "dedicated",
+        "showReuseMessage": true,
+        "clear": false
+      }
+    },
+    {
+      "label": "tsc: watch agent",
+      "type": "shell",
+      "command": "node_modules/.bin/tsc",
+      "args": ["--watch", "--preserveWatchOutput", "--project", "service/smtp-agent"],
+      "group": {
+        "kind": "build",
+        "isDefault": true
+      },
+      "problemMatcher": ["$tsc-watch"],
+      "isBackground": true,
+      "presentation": {
+        "reveal": "always",
+        "panel": "dedicated",
+        "showReuseMessage": true,
+        "clear": false
+      }
+    },
+    {
+      "label": "tsc: watch all",
+      "dependsOn": [
+        "tsc: watch agent",
+        "tsc: watch admin"
+      ],
+      "group": {
+        "kind": "build",
+        "isDefault": true
+      },
+      "problemMatcher": ["$tsc-watch"],
+      "isBackground": true,
+      "presentation": {
+        "reveal": "always",
+        "panel": "dedicated",
+        "showReuseMessage": true,
+        "clear": false
+      }
+    },
+    {
+      "label": "tailwindcss: watch admin",
+      "type": "shell",
+      "command": "npx @tailwindcss/cli --input ./style.css --output ./public/stylesheet.css --watch",
+      "options": {
+        "cwd": "${workspaceFolder}/service/smtp-admin"
+      },
+      "group": "build",
+      "presentation": {
+        "reveal": "always",
+        "panel": "dedicated",
+        "showReuseMessage": true,
+        "clear": false
+      }
+    },
+    {
+      "label": "tailwindcss: watch all",
+      "dependsOn": [
+        "tailwindcss: watch admin"
+      ],
+      "group": "build",
+      "presentation": {
+        "reveal": "always",
+        "panel": "dedicated",
+        "showReuseMessage": true,
+        "clear": false
+      }
+    }
+  ],
+  "version": "2.0.0"
+}

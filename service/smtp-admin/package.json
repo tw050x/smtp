@@ -1,0 +1,36 @@
+{
+  "author": "tw050x (Richard Kielty)",
+  "description": "The smtp-admin service for viewing the smtp-agent database",
+  "dependencies": {
+    "bcryptjs": "^3.0.2",
+    "cookies": "^0.9.1",
+    "cors": "^2.8.5",
+    "date-fns": "^4.1.0",
+    "express": "^4.21.2",
+    "http-status-codes": "^2.3.0",
+    "jsonwebtoken": "^9.0.2",
+    "mongodb": "^6.12.0",
+    "node-cron": "^3.0.3",
+    "pug": "^3.0.3",
+    "uuid": "^11.0.3",
+    "validator": "^13.12.0",
+    "winston": "^3.17.0",
+    "zod": "^3.24.2"
+  },
+  "devDependencies": {
+    "@tailwindcss/cli": "^4.0.12",
+    "tailwindcss": "^4.0.12",
+    "typescript": "^5.7.2"
+  },
+  "installConfig": {
+    "hoistingLimits": "workspaces"
+  },
+  "license": "UNLICENSED",
+  "name": "smtp-admin",
+  "private": true,
+  "scripts": {
+    "css:compile": "@tailwindcss/cli --input ./style.css --output ./public/stylesheet.css --minify",
+    "js:compile": "tsc"
+  },
+  "version": "0.0.0"
+}

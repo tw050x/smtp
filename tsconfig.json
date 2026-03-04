@@ -1,0 +1,34 @@
+{
+  "compilerOptions": {
+    "allowSyntheticDefaultImports": true,
+    "composite": true,
+    "esModuleInterop": true,
+    "forceConsistentCasingInFileNames": true,
+    "module": "CommonJS",
+    "moduleResolution": "Node",
+    "strict": true,
+    "target": "ES2022"
+  },
+  "exclude": [
+    ".vscode/",
+    ".yarn/",
+    "artifact/",
+    "container/",
+    "coverage/",
+    "documentation/",
+    "log/",
+    "node_modules/",
+    "playground/",
+    "tmp/"
+  ],
+  "references": [
+    { "path": "./service/smtp-admin" },
+    { "path": "./service/smtp-agent" },
+    { "path": "./task/smtp-analyser" },
+  ],
+  "ts-node": {
+    "compilerOptions": {
+      "module": "CommonJS"
+    }
+  }
+}

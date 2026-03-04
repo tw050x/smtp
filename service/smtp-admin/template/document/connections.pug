@@ -1,0 +1,15 @@
+doctype html
+html(lang="en")
+  head
+    base(href="/")
+    meta(charset="UTF-8")
+    meta(name="viewport" content="width=device-width, initial-scale=1")
+    title SMTP Admin | Connections
+
+    include /partial/head/htmx
+    include /partial/head/tailwindcss
+  body
+    div(class="flex flex-col px-8 py-8 min-h-screen")
+      h1(class="text-4xl") Connections
+      include /partial/form/connections-filters
+      include /partial/table/connections

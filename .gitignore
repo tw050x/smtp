@@ -1,0 +1,25 @@
+
+# Terraform directories and files
+.terraform/
+*.tfvars
+
+# Ignore all .js files
+*.js
+!*.config.js
+!*.migration.js
+!jest.setup.js
+!jest.teardown.js
+
+# Ignore all artifacts
+artifact/
+certificate/
+coverage/
+log/
+tmp/
+
+# Ignore node_modules
+node_modules/
+
+# Yarn files
+.yarn/install-state.gz
+yarn-error.log

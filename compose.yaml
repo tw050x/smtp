@@ -1,0 +1,66 @@
+
+services:
+
+  mongo:
+    env_file:
+      - path: service/mongo/.env
+        required: true
+    image: mongo:7.0.16
+    mem_limit: 100mb
+    ports:
+      - 27017:27017
+    volumes:
+      - type: bind
+        source: ./service/mongo/data
+        target: /data/db
+
+  smtp-admin:
+    build:
+      context: .
+      dockerfile: container/service/smtp-admin/Dockerfile
+    command: [ "tsx", "--inspect=0.0.0.0:9229", "--watch-path=/srv", "serve.ts" ]
+    mem_limit: 100mb
+    ports:
+      - 9120:9120
+      - 9121:9229
+    volumes:
+      - source: ./log/smtp-admin
+        target: /log
+        type: bind
+      - source: ./service/smtp-admin
+        target: /srv
+        type: bind
+
+  smtp-agent:
+    build:
+      context: .
+      dockerfile: container/service/smtp-agent/Dockerfile
+    command: [ "tsx", "--inspect=0.0.0.0:9229", "--watch-path=/srv", "serve.ts" ]
+    ports:
+      - 9110:9110
+      - 9111:9229
+    mem_limit: 100mb
+    volumes:
+      - source: ./log/smtp-agent
+        target: /log
+        type: bind
+      - source: ./service/smtp-agent
+        target: /srv
+        type: bind
+      - source: ./service/smtp-agent/cron.d
+        target: /etc/cron.d
+        type: bind
+
+  smtp-analyser:
+    build:
+      context: .
+      dockerfile: container/task/smtp-analyser/Dockerfile
+    command: [ "tsx", "--inspect=0.0.0.0:9229", "--watch-path=/srv", "run.ts" ]
+    mem_limit: 100mb
+    volumes:
+      - source: ./log/smtp-analyser
+        target: /log
+        type: bind
+      - source: ./task/smtp-analyser
+        target: /srv
+        type: bind

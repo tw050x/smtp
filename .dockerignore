@@ -1,0 +1,26 @@
+
+# Directories
+.secret/
+.vscode/
+artifact/
+configuration/
+documentation/
+infrastructure/
+log/
+node_modules/
+service/smtp-agent/.secret/
+service/smtp-agent/log/
+service/smtp-agent/node_modules/
+service/smtp-agent/specification/
+terraform/
+tmp/
+
+# Files
+service/smtp-agent/.env
+service/smtp-agent/.env.example
+service/smtp-agent/.env.production
+service/smtp-agent/jest.config.ts
+service/smtp-agent/jest.globals.d.ts
+service/smtp-agent/jest.setup.ts
+service/smtp-agent/jest.teardown.ts
+service/smtp-agent/jest.vars.ts

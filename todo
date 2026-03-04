@@ -1,0 +1,5 @@
+
+* Fix issue where invalid commands result in errors such as "nested MAIL command"
+* Write tests for the lines database collection
+* Write tests for the responses database collection
+* Write tests for the connections database collection

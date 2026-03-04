@@ -1,0 +1,42 @@
+div(class="mb-4 border-b border-gray-600 pb-4 pt-8")
+  h3(class="text-lg font-semibold mb-2") Filters
+  form(
+    method="GET" id="filter-form" hx-get="/admin/connections" hx-push-url="true" hx-swap="outerHTML" hx-target=`#${connectionsTableId}` class="flex flex-wrap gap-4 items-end"
+  )
+    input(type="hidden" name="pi" value="0")
+    input(type="hidden" name="ps" value=(pagination.pageSize))
+
+    div(class="flex flex-col")
+      label(for="df" class="text-sm font-medium text-gray-700") From Date
+      input(
+        type="date"
+        id="df"
+        name="df"
+        value=(searchFilters.dateFrom)
+        class="mt-1 p-1 border border-gray-300 rounded-md shadow-sm text-sm focus:ring-blue-500 focus:border-blue-500"
+      )
+
+    div(class="flex flex-col")
+      label(for="dt" class="text-sm font-medium text-gray-700") To Date
+      input(
+        type="date"
+        id="dt"
+        name="dt"
+        value=(searchFilters.dateTo)
+        class="mt-1 p-1 border border-gray-300 rounded-md shadow-sm text-sm focus:ring-blue-500 focus:border-blue-500"
+      )
+
+    div(class="flex space-x-2")
+      button(type="submit" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-1 px-3 rounded text-sm") Apply Filters
+      a(href="/admin/connections" class="bg-gray-300 hover:bg-gray-400 text-gray-800 font-bold py-1 px-3 rounded text-sm inline-block") Reset
+
+script.
+  document.getElementById('filter-form').addEventListener('submit', function(e) {
+    // Remove empty inputs to keep URL clean
+    const inputs = this.querySelectorAll('input:not([type="hidden"])');
+    for (const input of inputs) {
+      if (input.value === '') {
+        input.disabled = true; // Disabled inputs aren't submitted
+      }
+    }
+  });

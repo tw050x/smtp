@@ -1,0 +1,35 @@
+{
+  "configurations": [
+    {
+      "name": "Debug SMTP Admin Service",
+      "type": "node",
+      "request": "attach",
+      "restart": true,
+      "port": 9121,
+      "address": "localhost",
+      "localRoot": "${workspaceFolder}/service/smtp-admin",
+      "remoteRoot": "/srv",
+    },
+    {
+      "name": "Debug SMTP Agent Service",
+      "type": "node",
+      "request": "attach",
+      "restart": true,
+      "port": 9111,
+      "address": "localhost",
+      "localRoot": "${workspaceFolder}/service/smtp-agent",
+      "remoteRoot": "/srv",
+    },
+    {
+      "name": "Debug SMTP Analyser Service",
+      "type": "node",
+      "request": "attach",
+      "restart": true,
+      "port": 9131,
+      "address": "localhost",
+      "localRoot": "${workspaceFolder}/task/smtp-analyser",
+      "remoteRoot": "/srv",
+    },
+  ],
+  "version": "0.2.0"
+}

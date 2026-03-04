@@ -1,0 +1,33 @@
+{
+  "compilerOptions": {
+    "composite": true,
+    "declarationMap": true,
+    "outDir": "../../artifact/service/smtp-agent",
+    "rootDir": ".",
+  },
+  "exclude": [
+    ".configuration/",
+    ".secret/",
+    "log/",
+    "node_modules/",
+    "specification/",
+    "jest.config.ts",
+    "jest.globals.d.ts",
+    "jest.setup.ts",
+    "jest.teardown.ts",
+    "jest.vars.ts",
+  ],
+  "extends": "../../tsconfig.json",
+  "files": [
+    "configuration.ts",
+    "constant.ts",
+    "database.ts",
+    "error.ts",
+    "handler.connection.ts",
+    "helper.ts",
+    "logger.ts",
+    "secret.ts",
+    "serve.ts",
+    "types.ts",
+  ],
+}

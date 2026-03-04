@@ -1,0 +1,20 @@
+{
+  "compilerOptions": {
+    "outDir": "../../artifact/service/smtp-analyser",
+    "rootDir": ".",
+  },
+  "exclude": [
+    ".configuration/",
+    ".secret/",
+    "node_modules/",
+  ],
+  "extends": "../../tsconfig.json",
+  "files": [
+    "helper/get-connections-to-be-analysed.ts",
+    "configuration.ts",
+    "database.ts",
+    "logger.ts",
+    "run.ts",
+    "secret.ts",
+  ]
+}

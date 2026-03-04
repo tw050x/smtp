@@ -1,0 +1,4 @@
+*
+!.gitignore
+!smtp-database.password
+!smtp-database.user

@@ -1,0 +1,38 @@
+{
+  "compilerOptions": {
+    "rootDir": ".",
+    "strict": true
+  },
+  "exclude": [
+    ".configuration/",
+    ".secret/",
+    "log/",
+    "node_modules/"
+  ],
+  "extends": "./tsconfig.json",
+  "files": [
+    "specification/rfc-821.spec.ts",
+    "specification/rfc-5321.spec.ts",
+    "configuration.ts",
+    "constant.ts",
+    "database.ts",
+    "error.ts",
+    "handler.connection.ts",
+    "handler.listen.ts",
+    "helper.ts",
+    "jest.config.ts",
+    "jest.globals.d.ts",
+    "jest.setup.ts",
+    "jest.teardown.ts",
+    "jest.vars.ts",
+    "logger.ts",
+    "secret.ts",
+    "serve.ts",
+    "types.ts",
+  ],
+  "references": [
+    {
+      "path": "."
+    }
+  ],
+}

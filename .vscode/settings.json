@@ -1,0 +1,23 @@
+{
+
+  // Chat
+  "chat.agent.enabled": true,
+
+  // Editor
+  "editor.formatOnSave": false,
+
+
+  // Files
+  "files.associations": {
+    "cron.d/*": "shellscript",
+  },
+  "files.trimFinalNewlines": true,
+  "files.trimTrailingWhitespace": true,
+  "files.insertFinalNewline": true,
+
+  // Jest
+  "jest.runMode": "on-demand",
+
+  // Testing
+  "testing.automaticallyOpenTestResults": "neverOpen",
+}

@@ -1,0 +1,30 @@
+doctype html
+html(lang="en")
+  head
+    base(href="/")
+    meta(charset="UTF-8")
+    meta(name="viewport" content="width=device-width, initial-scale=1")
+    title SMTP Admin | Connection By UUID
+
+    include /partial/head/htmx
+    include /partial/head/tailwindcss
+  body
+    div(class="flex flex-col px-8 py-8 min-h-screen")
+      h1(class="text-4xl") Connection #{connection.uuid}
+
+      div(class="mt-4")
+        if connection.lines.length === 0
+          div(class="text-left text-gray-500")
+            | No lines found for this connection.
+        else
+          for line in connection.lines
+            div
+              div
+                span(class="text-gray-500") C:&nbsp;
+                | #{line.data}
+              if line.responses && line.responses.length
+                for response in line.responses
+                  div
+                    span(class="text-gray-500") S:&nbsp;
+                    | #{response.data}
+          div(class="text-center text-gray-500 mt-4")

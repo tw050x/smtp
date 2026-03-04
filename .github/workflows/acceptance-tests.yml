@@ -1,0 +1,65 @@
+name: Acceptance Tests
+
+on:
+  push:
+    branches:
+      - master
+
+jobs:
+  acceptance-tests:
+    name: acceptance tests
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: Enable Corepack and Yarn 4.9.1
+        run: |
+          corepack enable
+          corepack prepare yarn@4.9.1 --activate
+
+      - name: Install dependencies
+        run: yarn install --immutable
+
+      - name: Create smtp-agent configuration
+        run: |
+          mkdir -p service/smtp-agent/.configuration
+          echo "smtp" > service/smtp-agent/.configuration/smtp-database.name
+          echo "mongodb://127.0.0.1:27017" > service/smtp-agent/.configuration/smtp-database.uri
+          echo "info" > service/smtp-agent/.configuration/smtp-service.agent.log.level
+          echo "/log" > service/smtp-agent/.configuration/smtp-service.agent.log.path
+          echo "26214400" > service/smtp-agent/.configuration/smtp-service.agent.server.file-size
+          echo "127.0.0.1" > service/smtp-agent/.configuration/smtp-service.agent.server.host
+          echo "9110" > service/smtp-agent/.configuration/smtp-service.agent.server.port
+          echo "30000" > service/smtp-agent/.configuration/smtp-service.agent.server.timeout
+
+      - name: Create smtp-agent secrets
+        run: |
+          mkdir -p service/smtp-agent/.secret
+          echo "password" > service/smtp-agent/.secret/smtp-database.password
+          echo "user" > service/smtp-agent/.secret/smtp-database.user
+          openssl req -x509 -newkey rsa:4096 -keyout service/smtp-agent/.secret/smtp-service.agent.server.key -out service/smtp-agent/.secret/smtp-service.agent.server.certificate -days 1 -nodes -subj "/CN=localhost"
+
+      - name: Run acceptance tests
+        run: yarn workspaces foreach --all run acceptance-test
+
+      - name: Publish JUnit test report
+        if: always()
+        uses: mikepenz/action-junit-report@v4
+        with:
+          report_paths: coverage/service/smtp-agent/junit.xml
+
+      - name: Upload artifacts
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: ${{ github.ref_name }}-acceptance-tests
+          path: |
+            coverage/
+            node_modules/

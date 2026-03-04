@@ -1,0 +1,32 @@
+{
+  "compilerOptions": {
+    "outDir": "../../artifact/service/smtp-admin",
+    "rootDir": ".",
+  },
+  "exclude": [
+    ".secret/",
+    "node_modules/",
+  ],
+  "extends": "../../tsconfig.json",
+  "files": [
+    "helper/is-allowed-origins.ts",
+    "helper/redirect-to-credential-login-url.ts",
+    "helper/sanitize-mongodb-filter-or-pipeline.ts",
+    "middleware/access-token-cookie-verification.ts",
+    "route/admin/connections/get.ts",
+    "route/admin/connections/options.ts",
+    "route/admin/connections/:uuid/get.ts",
+    "route/admin/connections/:uuid/options.ts",
+    "route/admin/dashboard/get.ts",
+    "route/admin/dashboard/options.ts",
+    "route/admin/get.ts",
+    "route/admin/options.ts",
+    "configuration.ts",
+    "database.ts",
+    "encryption.ts",
+    "logger.ts",
+    "secret.ts",
+    "serve.ts",
+    "template.ts",
+  ]
+}
