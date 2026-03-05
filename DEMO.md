@@ -1,6 +1,6 @@
 # Demo
 
-Welcome to the smtp server. This document will guide you through the DEMO of the applications and the agent. This entire document assumes you have completed the setup work required in the p [readme](./README.md).
+Welcome to the smtp server. This document will guide you through the DEMO of the applications and the agent. This entire document assumes you have completed the setup work required in the [readme](./README.md).
 
 ## Getting Started
 
@@ -41,11 +41,11 @@ Sending a complete email consists of
 
 ## Reset
 
-You can send an `RSET` command at any point to return back to the point where you send the `MAiL FROM: <...>` command.
+You can send an `RSET` command at any point to return back to the point where you send the `MAIL FROM: <...>` command.
 
 ## Multiple emails
 
-You can complete one email and before closing the connection you can send another `RCPT TO: <...>` command to begin another email.
+You can complete one email and before closing the connection you can send another `MAIL FROM: <...>` command to begin another email.
 
 ## SMTP features
 

@@ -2,6 +2,8 @@
 
 Welcome to the SMTP service repository. This repository contains the source code for the SMTP servers that are used to receive and review emails.
 
+> This repository is a demonstration only. You should not attempt to use this code in a production environment.
+
 ## Installation
 
 You should be running node `v20.8.1` or higher to run this server. Using `nvm` is recommended.
